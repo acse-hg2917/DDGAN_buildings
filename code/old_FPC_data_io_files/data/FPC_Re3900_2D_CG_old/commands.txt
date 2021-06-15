@@ -1,0 +1,8 @@
+
+# generating a mesh
+gmsh -2 circle.geo
+
+# checking it in paraview
+gmsh2vtu circle
+
+# project (DG velocities) onto this CG mesh

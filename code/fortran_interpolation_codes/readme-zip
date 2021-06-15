@@ -1,0 +1,6 @@
+zip fortran_interpolation_codes.zip *
+unzip fortran_interpolation_codes.zip # unzips here
+
+mkdir my_dir
+unzip fortran_interpolation_codes.zip -d my_dir
+

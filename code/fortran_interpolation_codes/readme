@@ -1,0 +1,10 @@
+to compile the fortran library for python to use (u2r is the library):
+python2 -m numpy.f2py -c unstruc_mesh_2_regular_grid_new.f90 -m u2r
+
+to run the interpolaiton test:
+python2 interpolation_test.py
+
+to compile in fortran:
+
+gfortran -fdefault-real-8 -o unstruc_mesh_2_regular_grid_new unstruc_mesh_2_regular_grid_new.f90
+

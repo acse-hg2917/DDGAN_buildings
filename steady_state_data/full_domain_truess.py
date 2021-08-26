@@ -31,7 +31,7 @@ plt.plot([0,3], [3,3],'k-')
 plt.show()
 #%%
 # import vtu file and make interpolations
-snapshot_data_location = '/Users/gohannaago/Desktop/IC_MSc_ACSE/9_PROJECT/ddpod/'
+snapshot_data_location = '/Users/gohannaago/Desktop/IC_MSc_ACSE/9_PROJECT/steady_state_data/'
 snapshot_file_base = 'Flow_past_buildings_Re1_training_'
 nTime = 1
 nDim = 2
@@ -48,6 +48,7 @@ ddx = np.array((0.01,0.01))
 filename = snapshot_data_location + snapshot_file_base + '400.vtu'
 representative_vtu = vtktools.vtu(filename)
 coordinates_org = representative_vtu.GetLocations() #coordinates of the nodes
+coordinates = coordinates_org
 nNodes = coordinates.shape[0] # vtu_data.ugrid.GetNumberOfPoints()
 nEl = representative_vtu.ugrid.GetNumberOfCells()
 nloc = 3
@@ -101,8 +102,13 @@ min_vel = np.amin(snapshot_ae[:,:,:,:2]) #minimum among u and v velocity
 max_vel = np.amax(snapshot_ae[:,:,:,:2])
 min_va = np.amin(snapshot_ae[:,:,:,2])
 max_va = np.amax(snapshot_ae[:,:,:,2])
-vel_scaling = 1/(max_vel-min_vel)
+# vel_scaling = 1/(max_vel-min_vel)
 va_scaling = 1/(max_va - min_va) #maximum of buildings information is 100000
+
+# #maybe should try using that of 08153000 rather than averaging
+# min_vel =  -6.329753160476685
+# max_vel = 6.316451787948608
+vel_scaling = 1/(max_vel-min_vel)
 
 print("min_vel = ", min_vel, " , max_vel = ", max_vel, " , vel_scaling = ", vel_scaling)
 
@@ -110,13 +116,14 @@ print("min_vel = ", min_vel, " , max_vel = ", max_vel, " , vel_scaling = ", vel_
 snapshot_ae[:,:,:,:2] = vel_scaling*(snapshot_ae[:,:,:,:2]-min_vel)
 snapshot_ae[:,:,:,2] = va_scaling*snapshot_ae[:,:,:,2]
 
+print("Scaled_min = ", np.amin(snapshot_ae[:,:,:,:2]), " scaled max = ", np.amax(snapshot_ae[:,:,:,:2]))
 
 #save grid origins for the TD case dataset
-np.save("reg_snapshots_truess.npy", snapshot_ae)
+np.save("reg_snapshots_truess_0824.npy", snapshot_ae)
 # np.save("reg_grid_origins.npy", grid_origins)
 
 #%%
-textfile = open("full_domain_truess.txt", 'w')
+textfile = open("full_domain_truess_0824.txt", 'w')
 textfile.write("min_vel = "+str(min_vel) +" , max_vel = "+ str(max_vel)+ " , vel_scaling = "+ str(vel_scaling))
 textfile.close()
 

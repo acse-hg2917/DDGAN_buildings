@@ -33,7 +33,7 @@
 <br />
 <p align="center">
 
-  **<h2 align="center">Building a detailed flow model of acity using Domain Decomposition, Convolutional Autoencoders and Generative Adversarial Networks</h2>**
+  **<h2 align="center">Building a detailed flow model of acity using Domain Decomposition, Convolutional Autoencoders and Adversarial Networks</h2>**
   <a href="https://github.com/acse-hg2917/DDGAN_buildings">
   </a>
 
